@@ -44,6 +44,14 @@ public class Troncon {
 	}
 
 
+	@Override
+	public String toString() {
+		return "Troncon [nomRue=" + nomRue + ", vitesse=" + vitesse
+				+ ", longueur=" + longueur + ", depart=" + depart
+				+ ", destination=" + destination + "]";
+	}
+
+
 	
 	
 	

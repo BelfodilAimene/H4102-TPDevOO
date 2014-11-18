@@ -44,8 +44,13 @@ public class Chemin {
 	}
 	@Override
 	public String toString() {
-		return "Chemin [depart=" + depart + ", destination=" + destination
-				+ ", cout=" + cout + "]";
+		String S="Chemin [depart=" + depart + ", destination=" + destination
+				+ ", Duree=" + Math.ceil(cout)+ "]\n";
+		for (Troncon troncon : this.getListeTroncon()) {
+			S+="\t\t"+troncon.toString()+"\n";
+		}
+		return S;
+		
 	}
 	
 	

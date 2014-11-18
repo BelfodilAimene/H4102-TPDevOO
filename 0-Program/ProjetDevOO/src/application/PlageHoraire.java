@@ -51,10 +51,20 @@ public class PlageHoraire {
 	public int getNombreLivraisons() {
 		return listeLivraisons.size();
 	}
+	
+	public Livraison getLivraisonDeNoeud(Noeud noeud) {
+		for (Livraison L : this.getListeLivraisons()) {
+			if (L.getNoeudLivraison() == noeud) return L;
+		}
+		return null;
+	}
+
+	@Override
+	public String toString() {
+		return "PlageHoraire [heureDebut=" + heureDebut + ", heureFin="
+				+ heureFin + "]";
+	}
     
-    /**
-     * 
-     */
     
 	
 

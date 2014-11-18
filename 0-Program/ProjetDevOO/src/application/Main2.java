@@ -29,6 +29,7 @@ public class Main2 {
 		Troncon troncon10=new Troncon("r1", 30, 40, noeud6, noeud1);
 		
 		Zone zone=new Zone("aymen.xml",noeuds);
+		
 		//--------------------------------------
 		// LIVRAISON
 		Livraison livraison1=new Livraison(1, noeud3);
@@ -45,9 +46,10 @@ public class Main2 {
 		FeuilleDeRoute feuilleDeRoute=new FeuilleDeRoute(zone, 1, listePlagesHoraire);
 		
 		//--------------------------------------------------------------
-		GraphLivraison graphLivraison = new GraphLivraison(feuilleDeRoute);
-		System.out.println(graphLivraison.getMaxArcCost());
-		
+		feuilleDeRoute.calculerItineraire(); 
+		//GraphLivraison graphLivraison = new GraphLivraison(feuilleDeRoute);
+		//System.out.println(graphLivraison.getMaxArcCost());
+		feuilleDeRoute.AfficherItiniraire(); 
 	}
 
 }

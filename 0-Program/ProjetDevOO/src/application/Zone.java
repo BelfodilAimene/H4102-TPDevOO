@@ -2,6 +2,7 @@ package application;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map.Entry;
 
 public class Zone {
 	private String nomFichier;
@@ -42,6 +43,39 @@ public class Zone {
 		for (Noeud noeud : noeuds) {
 			addNoeud(noeud);
 		}
+	}
+	
+	
+	public int getMinX() {
+		int MinX=Integer.MAX_VALUE;
+		for (Entry<Integer,Noeud> entry: noeuds.entrySet()) {
+			if (MinX>entry.getValue().getX()) MinX=entry.getValue().getX();
+		}
+		return MinX;
+	}
+	
+	public int getMaxX() {
+		int MaxX=0;
+		for (Entry<Integer,Noeud> entry: noeuds.entrySet()) {
+			if (MaxX<entry.getValue().getX()) MaxX=entry.getValue().getX();
+		}
+		return MaxX;
+	}
+	
+	public int getMinY() {
+		int MinY=Integer.MAX_VALUE;
+		for (Entry<Integer,Noeud> entry: noeuds.entrySet()) {
+			if (MinY>entry.getValue().getY()) MinY=entry.getValue().getY();
+		}
+		return MinY;
+	}
+	
+	public int getMaxY() {
+		int MaxY=0;
+		for (Entry<Integer,Noeud> entry: noeuds.entrySet()) {
+			if (MaxY<entry.getValue().getY()) MaxY=entry.getValue().getY();
+		}
+		return MaxY;
 	}
 
 

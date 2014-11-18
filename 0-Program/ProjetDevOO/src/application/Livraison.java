@@ -47,10 +47,10 @@ public class Livraison {
 
 	public void setHeureArrive(Temps heureArrive) {
 		this.heureArrive = heureArrive;
-		this.heureDepart = heureArrive;
+		this.heureDepart = new Temps(heureArrive.toString());
 		if (this.heureDepart.getTempsValue() < plageHoraire.getHeureDebut()
 				.getTempsValue()) {
-			this.heureDepart = plageHoraire.getHeureDebut();
+			this.heureDepart = plageHoraire.getHeureDebut().copy();
 		}
 		this.heureDepart.addTempsSeconde(DureeArret);
 
@@ -58,10 +58,6 @@ public class Livraison {
 
 	public Temps getHeureDepart() {
 		return heureDepart;
-	}
-
-	public void setHeureDepart(Temps heureDepart) {
-		this.heureDepart = heureDepart;
 	}
 
 	public PlageHoraire getPlageHoraire() {
@@ -79,5 +75,15 @@ public class Livraison {
 	public Noeud getNoeudLivraison() {
 		return noeudLivraison;
 	}
+
+	@Override
+	public String toString() {
+		return "Livraison [idLivraision=" + idLivraision + ", heureArrive="
+				+ heureArrive + ", heureDepart=" + heureDepart
+				+ ", à " + noeudLivraison + ", plageHoraire="
+				+ plageHoraire + "]";
+	}
+	
+	
 
 }

@@ -52,7 +52,7 @@ public class GraphLivraison implements Graph {
 		// -- idNoeud
 		tableCorrespondanceNoeud=new ArrayList<>();
 		
-		tableCorrespondanceNoeud.add(this.feuilleDeRoute.getEntrepot());
+		tableCorrespondanceNoeud.add(this.feuilleDeRoute.getEntrepot().getNoeud());
 		for (PlageHoraire plage : this.feuilleDeRoute.getListePlagesHoraire()) {
 			for (Livraison livraison : plage.getListeLivraisons()) {
 				tableCorrespondanceNoeud.add(livraison.getNoeudLivraison());
@@ -65,7 +65,7 @@ public class GraphLivraison implements Graph {
 
 		// ---Chemin : Entrepot -> Première plage horaire
 
-		Noeud noeudDepart = feuilleDeRoute.getEntrepot();
+		Noeud noeudDepart = feuilleDeRoute.getEntrepot().getNoeud();
 		Noeud noeudDestination;
 		for (Livraison livraison : feuilleDeRoute.getListePlagesHoraire()
 				.get(0).getListeLivraisons()) {
@@ -105,7 +105,7 @@ public class GraphLivraison implements Graph {
 					}
 				} else {
 					// A l'entrepot
-					noeudDestination = feuilleDeRoute.getEntrepot();
+					noeudDestination = feuilleDeRoute.getEntrepot().getNoeud();
 					Chemin chemin = CalculManager.Djikstra(
 							this.feuilleDeRoute.getZone(), noeudDepart.getId(),
 							noeudDestination.getId());
