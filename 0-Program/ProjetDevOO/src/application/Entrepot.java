@@ -1,38 +1,77 @@
 package application;
 
+/**
+ * classe représenant un entrepôt
+ * 
+ * @author H4102
+ *
+ */
 public class Entrepot {
+
+	/**
+	 * noeud de l'emplaçement l'entrepôt
+	 */
 	private Noeud noeud;
 	/**
-     * 
-     */
-	private Temps heureDepart=null;
+	 * Heure de départ de l'entrepôt (pour une demande de livraison
+	 * particulière)
+	 */
+	private Temps heureDepart = null;
 
 	/**
-     * 
-     */
-	private Temps heureArrive=null;
+	 * Heure d'arrivé à l'entrepôt (pour une demande de livraison particulière)
+	 */
+	private Temps heureArrive = null;
 
+	/**
+	 * construit un entrepôt
+	 * 
+	 * @param noeud
+	 *            emplaçement de l'entrepôt
+	 */
 	public Entrepot(Noeud noeud) {
 		super();
 		this.noeud = noeud;
 	}
 
+	/**
+	 * 
+	 * @return Heure de départ de l'entrepôt
+	 */
 	public Temps getHeureDepart() {
 		return heureDepart;
 	}
 
+	/**
+	 * 
+	 * @param heureDepart
+	 *            Heure de départ de l'entrepôt
+	 */
 	public void setHeureDepart(Temps heureDepart) {
 		this.heureDepart = heureDepart;
 	}
 
+	/**
+	 * 
+	 * @return Heure d'arrivée à l'entrepôt
+	 */
 	public Temps getHeureArrive() {
 		return heureArrive;
 	}
 
+	/**
+	 * 
+	 * @param heureArrive
+	 *            Heure d'arrivée à l'entrepôt
+	 */
 	public void setHeureArrive(Temps heureArrive) {
 		this.heureArrive = heureArrive;
 	}
 
+	/**
+	 * 
+	 * @return noeud représentant l'emplaçement de l'entrepôt
+	 */
 	public Noeud getNoeud() {
 		return noeud;
 	}
@@ -42,13 +81,4 @@ public class Entrepot {
 		return "Entrepot [noeud=" + noeud + ", heureDepart=" + heureDepart
 				+ ", heureArrive=" + heureArrive + "]";
 	}
-	
-	
-	
-	/**
-     * 
-     */
-	
-	
-
 }

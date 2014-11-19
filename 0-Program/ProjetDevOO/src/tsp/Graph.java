@@ -7,39 +7,39 @@ package tsp;
 public interface Graph {
 
 	/**
-	 * @return the maximal cost of an arc of <code>this</code>
+	 * @return the maximal cost of an arc of <b>this</b>
 	 */
 	public abstract int getMaxArcCost();
 
 	/**
-	 * @return the minimal cost of an arc of <code>this</code>
+	 * @return the minimal cost of an arc of <b>this</b>
 	 */
 	public abstract int getMinArcCost();
 
 	/**
-	 * @return the number of vertices of <code>this</code>
+	 * @return the number of vertices of <b>this</b>
 	 */
 	public abstract int getNbVertices();
 
 	/**
-	 * @return the <code>cost</code> matrix of <code>this</code>: for all vertices <code>i</code> and <code>j</code>,
-	 * if <code>(i,j)</code> is an arc of <code>this</code>, then <code>cost[i][j]</code> = cost of <code>(i,j)</code>, 
-	 * otherwise <code>cost[i][j] = this.getMaxArcCost()+1</code>
+	 * @return the <b>cost</b> matrix of <b>this</b>: for all vertices <b>i</b> and <b>j</b>,
+	 * if <b>(i,j)</b> is an arc of <b>this</b>, then <b>cost[i][j]</b> = cost of <b>(i,j)</b>, 
+	 * otherwise <b>cost[i][j] = this.getMaxArcCost()+1</b>
 	 */
 	public abstract int[][] getCost();
 
 	/**
-	 * @param i a vertex such that <code>0 <= i < this.getNbVertices()</code>
-	 * @return an array containing all successor vertices of <code>i</code> in <code>this</code>
-	 * @throws ArrayIndexOutOfBoundsException If <code>i<0</code> or <code>i>=this.getNbVertices()</code>
+	 * @param i a vertex such that <b>0 <= i < this.getNbVertices()</b>
+	 * @return an array containing all successor vertices of <b>i</b> in <code>this</code>
+	 * @throws ArrayIndexOutOfBoundsException If <b>i<0</b> or <b>i>=this.getNbVertices()</b>
 	 */
 	public abstract int[] getSucc(int i)
 			throws ArrayIndexOutOfBoundsException;
 
 	/**
-	 * @param i a vertex such that <code>0 <= i < this.getNbVertices()</code>
-	 * @return the number of successor vertices of <code>i</code> in <code>this</code>
-	 * @throws ArrayIndexOutOfBoundsException If <code>i<0</code> or <code>i>=this.getNbVertices()</code>
+	 * @param i a vertex such that <b> 0 "<=" i "<" this.getNbVertices() </b>
+	 * @return the number of successor vertices of <b>i</b> in <b>this</b>
+	 * @throws ArrayIndexOutOfBoundsException If <b>i<0</b> or <b>i>=this.getNbVertices()</b>
 	 */
 	public abstract int getNbSucc(int i)
 			throws ArrayIndexOutOfBoundsException;

@@ -7,9 +7,6 @@
 <fullyQualifiedTypeName name="java.lang.String"/>
 <fullyQualifiedTypeName name="application.Chemin"/>
 <fullyQualifiedTypeName name="application.CalculManager"/>
-<fullyQualifiedTypeName name="application.FeuilleDeRoute"/>
-<fullyQualifiedTypeName name="application.LivraisonManager"/>
-<fullyQualifiedTypeName name="application.Livraison"/>
 <fullyQualifiedTypeName name="application.Noeud"/>
 <fullyQualifiedTypeName name="application.PlageHoraire"/>
 <fullyQualifiedTypeName name="application.GraphLivraison"/>
@@ -17,4 +14,12 @@
 <fullyQualifiedTypeName name="tsp.TSP"/>
 <fullyQualifiedTypeName name="application.Temps"/>
 <fullyQualifiedTypeName name="java.util.Map.Entry"/>
+<fullyQualifiedTypeName name="application.Livraison"/>
+<fullyQualifiedTypeName name="application.FeuilleDeRoute"/>
+<fullyQualifiedTypeName name="application.PlanManager"/>
+<fullyQualifiedTypeName name="application.LivraisonManager"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
+<fullyQualifiedTypeName name="application.Parametres"/>
+<fullyQualifiedTypeName name="java.io.FileWriter"/>
+<fullyQualifiedTypeName name="java.io.BufferedWriter"/>
 </qualifiedTypeNameHistroy>
