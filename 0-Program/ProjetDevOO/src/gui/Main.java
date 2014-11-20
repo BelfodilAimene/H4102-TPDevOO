@@ -9,24 +9,16 @@ package gui;
 
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.LinkedList;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import application.FeuilleDeRoute;
-import application.GraphLivraison;
-import application.Livraison;
 import application.Noeud;
-import application.PlageHoraire;
-import application.PlanManager;
-import application.Temps;
 import application.Troncon;
 import application.Zone;
 
@@ -35,12 +27,13 @@ import application.Zone;
  * @author LENOVO
  */
 public class Main extends Application {
-	private Stage primaryStage;
+	private static Stage primaryStage;
 	private AnchorPane anchor;
 	public static Zone zoneDeTest;
+	public static final int hauteurFenetre=639;
+	public static final int largeurFenetre=1028;
 	@Override
-	public void start(Stage primaryStage) {
-		creerZoneDeTest();
+	public void start(Stage primaryStage) {		
 		try {
 			BorderPane root = new BorderPane();
 			FXMLLoader loader = new FXMLLoader();
@@ -48,9 +41,13 @@ public class Main extends Application {
 			Parent racine=(Parent)loader.load();
 			FenetreController exp=loader.getController();
 			primaryStage.setScene(new Scene(racine));
+			primaryStage.setHeight(hauteurFenetre);
+			primaryStage.setWidth(largeurFenetre);
+			primaryStage.setResizable(false);
+			primaryStage.setTitle("Préparation des livraisons");
+			primaryStage.getIcons().add(new Image(Main.class.getResource("transporter.png").toExternalForm()));
 			primaryStage.show();
-			
-			
+				
 			
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -78,21 +75,24 @@ public class Main extends Application {
 		noeuds.add(noeud5);noeuds.add(noeud6);
 		
 		
-		Troncon troncon1=new Troncon("r1", 30, 40, noeud1, noeud2);
-		Troncon troncon2=new Troncon("r1", 30, 300, noeud1, noeud3);
-		Troncon troncon3=new Troncon("r1", 30, 30, noeud2, noeud3);
-		Troncon troncon4=new Troncon("r1", 30, 40, noeud3, noeud4);
-		Troncon troncon5=new Troncon("r1", 30, 40, noeud4, noeud2);
-		Troncon troncon6=new Troncon("r1", 30, 40, noeud2, noeud5);
-		Troncon troncon7=new Troncon("r1", 30, 40, noeud5, noeud4);
-		Troncon troncon8=new Troncon("r1", 30, 40, noeud5, noeud6);
-		Troncon troncon9=new Troncon("r1", 30, 40, noeud4, noeud6);
-		Troncon troncon10=new Troncon("r1", 30, 40, noeud6, noeud1);
+		Troncon troncon1=new Troncon("Rue Abdelkader", 10, 40, noeud1, noeud2);
+		Troncon troncon2=new Troncon("Rue moulay thani", 20, 300, noeud1, noeud3);
+		Troncon troncon3=new Troncon("Rue Anes l'artiste", 30, 30, noeud2, noeud3);
+		Troncon troncon4=new Troncon("Rue zina", 40, 40, noeud3, noeud4);
+		Troncon troncon5=new Troncon("Rue la rue 1", 50, 40, noeud4, noeud2);
+		Troncon troncon6=new Troncon("Rue la rue 1", 30, 40, noeud2, noeud5);
+		Troncon troncon7=new Troncon("Rue la rue 1", 30, 40, noeud5, noeud4);
+		Troncon troncon8=new Troncon("Rue la rue 1", 30, 40, noeud5, noeud6);
+		Troncon troncon9=new Troncon("Rue la rue 1", 30, 40, noeud4, noeud6);
+		Troncon troncon10=new Troncon("Rue la rue 1", 30, 40, noeud6, noeud1);
 		
-		zoneDeTest=PlanManager.chargerZone("plan10x10.xml");
-		
-		//zoneDeTest=new Zone("aymen.xml",noeuds);
+		zoneDeTest=new Zone("aymen.xml",noeuds);
 				
 	}
+
+	public static Stage getPrimaryStage() {
+		return primaryStage;
+	}
+	
 	
 }

@@ -102,8 +102,9 @@ public class PlageHoraire {
 
 	@Override
 	public String toString() {
-		return "PlageHoraire [heureDebut=" + heureDebut + ", heureFin="
-				+ heureFin + "]";
+		// TODO Auto-generated method stub
+		return heureDebut.heureMinute()+" - "+heureFin.heureMinute();
 	}
+	
 
 }

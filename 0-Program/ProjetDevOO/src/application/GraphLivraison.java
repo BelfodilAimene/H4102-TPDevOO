@@ -106,67 +106,12 @@ public class GraphLivraison implements Graph {
 	public void initMatriceChemin() {
 		int nombrePoints = feuilleDeRoute.getNombreLivraisons() + 1;
 		matriceChemin = new Chemin[nombrePoints][nombrePoints];
-		ArrayList<Noeud[]> couplesNoeuds = getCouplesNoeuds();
+		ArrayList<Noeud[]> couplesNoeuds = feuilleDeRoute.getCouplesNoeuds();
 		for (Noeud[] coupleNoeud : couplesNoeuds) {
 			Chemin chemin = feuilleDeRoute.Djikstra(coupleNoeud[0],
 					coupleNoeud[1]);
 			matriceChemin[getOrdreDeNoeud(coupleNoeud[0])][getOrdreDeNoeud(coupleNoeud[1])] = chemin;
 		}
-	}
-
-	/**
-	 * 
-	 * @return liste des couples de noeuds (depart,destination) possibles pour
-	 *         la construction de la matrice des chemins
-	 */
-	private ArrayList<Noeud[]> getCouplesNoeuds() {
-
-		ArrayList<Noeud[]> couplesNoeuds = new ArrayList<>();
-
-		Noeud noeudDepart = feuilleDeRoute.getEntrepot().getNoeud();
-		Noeud noeudDestination;
-		for (Livraison livraison : feuilleDeRoute.getListePlagesHoraire()
-				.get(0).getListeLivraisons()) {
-			noeudDestination = livraison.getNoeudLivraison();
-			Noeud coupleNoeuds[] = { noeudDepart, noeudDestination };
-			couplesNoeuds.add(coupleNoeuds);
-		}
-
-		for (int k = 0; k < feuilleDeRoute.getListePlagesHoraire().size(); k++) {
-			for (Livraison livraison : feuilleDeRoute.getListePlagesHoraire()
-					.get(k).getListeLivraisons()) {
-				noeudDepart = livraison.getNoeudLivraison();
-				// A l'interieur
-				for (Livraison livraisonDest : feuilleDeRoute
-						.getListePlagesHoraire().get(k).getListeLivraisons()) {
-					if (livraisonDest != livraison) {
-						noeudDestination = livraisonDest.getNoeudLivraison();
-						Noeud coupleNoeuds[] = { noeudDepart, noeudDestination };
-						couplesNoeuds.add(coupleNoeuds);
-					}
-				}
-
-				if (k < feuilleDeRoute.getListePlagesHoraire().size() - 1) {
-					// A la plage suivante
-					for (Livraison livraisonDest : feuilleDeRoute
-							.getListePlagesHoraire().get(k + 1)
-							.getListeLivraisons()) {
-						noeudDestination = livraisonDest.getNoeudLivraison();
-						Noeud coupleNoeuds[] = { noeudDepart, noeudDestination };
-						couplesNoeuds.add(coupleNoeuds);
-
-					}
-				} else {
-					// A l'entrepot
-					noeudDestination = feuilleDeRoute.getEntrepot().getNoeud();
-					Noeud coupleNoeuds[] = { noeudDepart, noeudDestination };
-					couplesNoeuds.add(coupleNoeuds);
-
-				}
-			}
-		}
-
-		return couplesNoeuds;
 	}
 
 	@Override

@@ -112,9 +112,8 @@ public class FeuilleDeRoute {
 	 * @param noeud
 	 *            noeud
 	 * @return la livraison prévu pour ce noeud (un noeud peut être associé à
-	 *         une seule livraison au max), 
-	 *         retourne null dans le cas ou
-	 *         aucune livraison dans cette plage correspond au noeud
+	 *         une seule livraison au max), retourne null dans le cas ou aucune
+	 *         livraison dans cette plage correspond au noeud
 	 */
 	public Livraison getLivraisonDeNoeud(Noeud noeud) {
 		Livraison tmp = null;
@@ -145,12 +144,12 @@ public class FeuilleDeRoute {
 		if (tsp.getSolutionState() != SolutionState.INCONSISTENT) {
 			int[] next = tsp.getNext();
 
-			int k = 0;
-			int i = next[k];
-
-			while (i != k) {
+			int i = next[0];
+			Chemin chemin = graphLivraison.getMatriceChemin()[0][i];
+			itineraire.add(chemin);
+			while (i != 0) {
 				// System.out.println(i+"-->"+next[i]);
-				Chemin chemin = graphLivraison.getMatriceChemin()[i][next[i]];
+				chemin = graphLivraison.getMatriceChemin()[i][next[i]];
 				itineraire.add(chemin);
 				i = next[i];
 			}
@@ -321,6 +320,8 @@ public class FeuilleDeRoute {
 		getItineraire().remove(ordre - 1);
 		getItineraire().add(ordre - 1, chemin);
 
+		livraison.getPlageHoraire().getListeLivraisons().remove(livraison);
+
 		majTemps();
 		return true;
 	}
@@ -394,19 +395,29 @@ public class FeuilleDeRoute {
 	 * met à jour les temps de passage (de l'entrepôt et de l'ensemble des
 	 * livraison) dans le cas ou on ajoute une nouvelle livraison, trouve aussi
 	 * la plage associé a cette livraison qui représente l'une des plage déja
-	 * existante contenant le temps d'arrivée de cette livraison, dans le
-	 * cas où aucune plage ne correspond à cette livraison, on place la
-	 * livraison dans la dernière plage, et la livraison est considérée comme
-	 * non faite à temps
-	 * @param livraison nouvelle livraison
+	 * existante contenant le temps d'arrivée de cette livraison, dans le cas où
+	 * aucune plage ne correspond à cette livraison, on place la livraison dans
+	 * la dernière plage, et la livraison est considérée comme non faite à temps
+	 * 
+	 * @param livraison
+	 *            nouvelle livraison
 	 */
 	void majTemps(Livraison livraison) {
 		if (Parametres.HeureDepart == null) {
 
 			Chemin cheminInitial = getItineraire().get(0);
-			Temps tempsDepart = getLivraisonDeNoeud(
-					cheminInitial.getDestination()).getPlageHoraire()
-					.getHeureDebut().copy();
+			Livraison l = getLivraisonDeNoeud(cheminInitial.getDestination());
+			Temps tempsDepart;
+			if (l != null) {
+				tempsDepart = l.getPlageHoraire().getHeureDebut().copy();
+			} else {
+				PlageHoraire plageHoraire = this.getListePlagesHoraire().get(0);
+				plageHoraire.addLivraison(livraison);
+				livraison.setIdLivraision(plageHoraire.getNombreLivraisons());
+				livraison.setHeureArrive(plageHoraire.getHeureDebut().copy());
+				tempsDepart = livraison.getPlageHoraire().getHeureDebut()
+						.copy();
+			}
 			tempsDepart
 					.subTempsSeconde((int) Math.ceil(cheminInitial.getCout()));
 			entrepot.setHeureDepart(tempsDepart);
@@ -476,6 +487,60 @@ public class FeuilleDeRoute {
 			return false;
 		}
 		return true;
+	}
+
+	/**
+	 * 
+	 * @return liste des couples de noeuds (depart,destination) possibles pour
+	 *         la construction de la matrice des chemins
+	 */
+	public ArrayList<Noeud[]> getCouplesNoeuds() {
+
+		ArrayList<Noeud[]> couplesNoeuds = new ArrayList<>();
+
+		Noeud noeudDepart = this.getEntrepot().getNoeud();
+		Noeud noeudDestination;
+		for (Livraison livraison : this.getListePlagesHoraire().get(0)
+				.getListeLivraisons()) {
+			noeudDestination = livraison.getNoeudLivraison();
+			Noeud coupleNoeuds[] = { noeudDepart, noeudDestination };
+			couplesNoeuds.add(coupleNoeuds);
+		}
+
+		for (int k = 0; k < this.getListePlagesHoraire().size(); k++) {
+			ArrayList<Livraison> listeActuel = getListePlagesHoraire().get(k)
+					.getListeLivraisons();
+			for (Livraison livraison : listeActuel) {
+				noeudDepart = livraison.getNoeudLivraison();
+				// A l'interieur
+				for (Livraison livraisonDest : listeActuel) {
+					if (livraisonDest != livraison) {
+						noeudDestination = livraisonDest.getNoeudLivraison();
+						Noeud coupleNoeuds[] = { noeudDepart, noeudDestination };
+						couplesNoeuds.add(coupleNoeuds);
+					}
+				}
+
+				if (k < this.getListePlagesHoraire().size() - 1) {
+					// A la plage suivante
+					for (Livraison livraisonDest : this.getListePlagesHoraire()
+							.get(k + 1).getListeLivraisons()) {
+						noeudDestination = livraisonDest.getNoeudLivraison();
+						Noeud coupleNoeuds[] = { noeudDepart, noeudDestination };
+						couplesNoeuds.add(coupleNoeuds);
+
+					}
+				} else {
+					// A l'entrepot
+					noeudDestination = this.getEntrepot().getNoeud();
+					Noeud coupleNoeuds[] = { noeudDepart, noeudDestination };
+					couplesNoeuds.add(coupleNoeuds);
+
+				}
+			}
+		}
+
+		return couplesNoeuds;
 	}
 
 }

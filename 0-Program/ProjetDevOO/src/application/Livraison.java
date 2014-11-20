@@ -122,6 +122,7 @@ public class Livraison {
 	 *         false sinon
 	 */
 	public boolean isInPlage() {
+		if (this.getHeureArrive()!=null) return true;
 		if (this.getHeureArrive().getTempsValue() <= this.getPlageHoraire()
 				.getHeureFin().getTempsValue()) {
 			return true;

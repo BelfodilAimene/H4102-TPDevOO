@@ -9,8 +9,6 @@
 <fullyQualifiedTypeName name="application.CalculManager"/>
 <fullyQualifiedTypeName name="application.Noeud"/>
 <fullyQualifiedTypeName name="application.PlageHoraire"/>
-<fullyQualifiedTypeName name="application.GraphLivraison"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="tsp.TSP"/>
 <fullyQualifiedTypeName name="application.Temps"/>
 <fullyQualifiedTypeName name="java.util.Map.Entry"/>
@@ -22,4 +20,10 @@
 <fullyQualifiedTypeName name="application.Parametres"/>
 <fullyQualifiedTypeName name="java.io.FileWriter"/>
 <fullyQualifiedTypeName name="java.io.BufferedWriter"/>
+<fullyQualifiedTypeName name="java.util.Deque"/>
+<fullyQualifiedTypeName name="java.util.ArrayDeque"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="application.AjoutLivraisonCommand"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="application.GraphLivraison"/>
 </qualifiedTypeNameHistroy>

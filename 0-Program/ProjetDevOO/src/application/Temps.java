@@ -84,6 +84,13 @@ public class Temps {
 		minute = (val % 3600) / 60;
 		seconde = val % 60;
 	}
+	/**
+	 * 
+	 * @return heure:minute du temps
+	 */
+	public String heureMinute() {
+		return heure+":"+minute;
+	}
 
 	@Override
 	public String toString() {
